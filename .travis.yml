@@ -12,7 +12,7 @@ jobs:
     if: branch != master
     env:
       - BRANCH_NAME=$TRAVIS_BRANCH
-      - BUCKET_NAME="frontend-${TRAVIS_BRANCH}-${TRAVIS_ID}"
+      - BUCKET_NAME="frontend-${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
       - STACK_NAME="frontend-${TRAVIS_BRANCH}-stack"
       - AWS_REGION=us-west-2
     script: docker-compose -f .docker/deploy/docker-compose.nonprod.yml up
