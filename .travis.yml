@@ -3,10 +3,12 @@ sudo: required
 services:
   - docker
 
-- stage: build
-  script:
-    - docker-compose -f .docker/ci/docker-compose.yml up
-- stage: deploy-nonprod
+stages: build
+  - name: build
+    script:
+      - docker-compose -f .docker/ci/docker-compose.yml up
+stages:
+  - name: deploy-nonprod
     if: branch != master
     env:
       - BRANCH_NAME=$TRAVIS_BRANCH
