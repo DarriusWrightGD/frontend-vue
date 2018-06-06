@@ -10,7 +10,7 @@ jobs:
     env:
       - BRANCH_NAME=$TRAVIS_BRANCH
       - BUCKET_NAME="frontend-${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
-      - STACK_NAME="frontend-${TRAVIS_BRANCH}-stack"
+      - STACK_NAME="frontend-${TRAVIS_BRANCH}-stack-${TRAVIS_BUILD_NUMBER}"
       - AWS_REGION=us-west-2
     script:
       - docker-compose -f .docker/ci/docker-compose.yml up
