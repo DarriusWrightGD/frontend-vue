@@ -3,5 +3,17 @@ sudo: required
 services:
   - docker
 
-script:
-  - docker-compose -f .docker/ci/docker-compose.yml up
+- stage: build
+  script:
+    - docker-compose -f .docker/ci/docker-compose.yml up
+- stage: deploy-nonprod
+    if: branch != master
+    env:
+      - BRANCH_NAME=$TRAVIS_BRANCH
+      - BUCKET_NAME="frontend-${TRAVIS_BRANCH}-${TRAVIS_ID}"
+      - STACK_NAME="frontend-${TRAVIS_BRANCH}-stack"
+      - AWS_REGION=us-west-2
+
+    script:
+      - docker-compose -f .docker/deploy/docker-compose.nonprod.yml up
+

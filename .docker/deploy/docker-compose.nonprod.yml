@@ -1,0 +1,19 @@
+version: '3.0'
+
+services:
+  aws:
+    build:
+      dockerfile: ./.docker/deploy/Dockerfile
+      context: ../..
+    volumes:
+      - ../..:/app
+      - ./nonprod.sh:/nonprod.sh
+    working_dir: /app
+    entrypoint: bash -c "chmod +x /nonprod.sh && /nonprod.sh"
+    environment:
+      - BRANCH_NAME
+      - BUCKET_NAME
+      - STACK_NAME
+      - AWS_REGION
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
