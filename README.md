@@ -2,6 +2,10 @@
 
 > A Vue.js project
 
+```
+aws cloudformation create-stack --stack-name ci-stack --template-body file://.aws/nonprod/template.yml --parameters ParameterKey=BucketName,ParameterValue=frontend-123456 ParameterKey=BranchName,ParameterValue=ci
+```
+
 ## Build Setup
 
 ``` bash

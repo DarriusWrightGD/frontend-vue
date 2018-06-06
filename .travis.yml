@@ -1,0 +1,18 @@
+sudo: required
+
+services:
+  - docker
+
+language: generic
+jobs:
+  include:
+  - stage: build-and-deploy
+    env:
+      - BRANCH_NAME=$TRAVIS_BRANCH
+      - BUCKET_NAME="frontend-${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
+      - STACK_NAME="frontend-${TRAVIS_BRANCH}-stack-${TRAVIS_BUILD_NUMBER}"
+      - AWS_REGION=us-west-2
+    script:
+      - docker-compose -f .docker/ci/docker-compose.yml up
+      - docker-compose -f .docker/deploy/docker-compose.nonprod.yml up
+

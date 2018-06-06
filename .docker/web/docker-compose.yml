@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  web:
+    build:
+      dockerfile: .docker/web/Dockerfile
+      context: ../..
+    ports:
+      - 3001:80
