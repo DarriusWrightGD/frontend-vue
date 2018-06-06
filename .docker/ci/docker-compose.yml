@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  build:
+    image: node:carbon
+    volumes:
+      - ../..:/app
+    working_dir: /app
+    entrypoint: bash -c 'npm install && npm test && npm run build'
